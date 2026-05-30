@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiUserPlus } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import { API_URL } from '../config';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -28,8 +29,8 @@ const Register = () => {
     setLoading(true);
     
     try {
-      // Now using proxy - no need for full URL!
-      const response = await axios.post('/api/auth/register', formData);
+      // Using API_URL from config
+      const response = await axios.post(`${API_URL}/api/auth/register`, formData);
       
       if (response.data.success) {
         setEmail(formData.email);
@@ -51,8 +52,8 @@ const Register = () => {
     setLoading(true);
     
     try {
-      // Using proxy
-      const response = await axios.post('/api/auth/verify-otp', { email, otp });
+      // Using API_URL from config
+      const response = await axios.post(`${API_URL}/api/auth/verify-otp`, { email, otp });
       
       if (response.data.success) {
         localStorage.setItem('token', response.data.token);
@@ -72,8 +73,8 @@ const Register = () => {
 
   const resendOTP = async () => {
     try {
-      // Using proxy
-      await axios.post('/api/auth/resend-otp', { email });
+      // Using API_URL from config
+      await axios.post(`${API_URL}/api/auth/resend-otp`, { email });
       toast.success('OTP resent! Check your email or server console');
     } catch (error) {
       console.error('Resend error:', error.response?.data);

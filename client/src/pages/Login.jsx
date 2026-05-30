@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { FiMail, FiLock, FiEye, FiEyeOff, FiLogIn } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import { API_URL } from '../config';
 
 const Login = ({ setIsAuthenticated, setUser }) => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Login = ({ setIsAuthenticated, setUser }) => {
     setLoading(true);
     
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const response = await axios.post(`${API_URL}/api/auth/login`, formData);
       
       if (response.data.success) {
         // Save token and user data

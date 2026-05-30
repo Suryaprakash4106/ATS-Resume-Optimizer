@@ -6,6 +6,7 @@ import {
 } from 'react-icons/fi';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { API_URL } from '../config';  // ← ADD THIS LINE
 
 const ATSScore = ({ user, darkMode }) => {
   const [loading, setLoading] = useState(false);
@@ -25,8 +26,8 @@ const ATSScore = ({ user, darkMode }) => {
     try {
       const token = localStorage.getItem('token');
       const [resumeRes, scoreRes] = await Promise.all([
-        axios.get('/api/resume/my-resume', { headers: { Authorization: `Bearer ${token}` } }),
-        axios.get('/api/resume/score', { headers: { Authorization: `Bearer ${token}` } })
+        axios.get(`${API_URL}/api/resume/my-resume`, { headers: { Authorization: `Bearer ${token}` } }),
+        axios.get(`${API_URL}/api/resume/score`, { headers: { Authorization: `Bearer ${token}` } })
       ]);
       setResumeData(resumeRes.data.data);
       setAtsData(scoreRes.data.data);
@@ -64,7 +65,7 @@ const ATSScore = ({ user, darkMode }) => {
     
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('/api/resume/analyze', 
+      const response = await axios.post(`${API_URL}/api/resume/analyze`, 
         { 
           resumeData: resumeData.resumeData, 
           jobDescription: jobDescription 

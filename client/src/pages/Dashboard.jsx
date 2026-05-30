@@ -7,6 +7,7 @@ import {
 } from 'react-icons/fi';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { API_URL } from '../config';  // ← ADD THIS LINE
 
 const Dashboard = ({ user, darkMode }) => {
   const navigate = useNavigate();
@@ -22,8 +23,8 @@ const Dashboard = ({ user, darkMode }) => {
     try {
       const token = localStorage.getItem('token');
       const [resumeRes, scoreRes] = await Promise.all([
-        axios.get('/api/resume/my-resume', { headers: { Authorization: `Bearer ${token}` } }),
-        axios.get('/api/resume/score', { headers: { Authorization: `Bearer ${token}` } })
+        axios.get(`${API_URL}/api/resume/my-resume`, { headers: { Authorization: `Bearer ${token}` } }),
+        axios.get(`${API_URL}/api/resume/score`, { headers: { Authorization: `Bearer ${token}` } })
       ]);
       setResumeData(resumeRes.data.data);
       setAtsScore(scoreRes.data.data);

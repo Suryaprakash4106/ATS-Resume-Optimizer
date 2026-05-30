@@ -7,6 +7,7 @@ import {
 } from 'react-icons/fi';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { API_URL } from '../config';  // ← ADD THIS LINE
 
 const AdminPanel = ({ darkMode }) => {
   const [users, setUsers] = useState([]);
@@ -25,10 +26,10 @@ const AdminPanel = ({ darkMode }) => {
     try {
       const token = localStorage.getItem('token');
       const [usersRes, activityRes, statsRes, historyRes] = await Promise.all([
-        axios.get('/api/admin/users', { headers: { Authorization: `Bearer ${token}` } }),
-        axios.get('/api/admin/user-activity', { headers: { Authorization: `Bearer ${token}` } }),
-        axios.get('/api/admin/stats', { headers: { Authorization: `Bearer ${token}` } }),
-        axios.get('/api/admin/optimizer-history', { headers: { Authorization: `Bearer ${token}` } })
+        axios.get(`${API_URL}/api/admin/users`, { headers: { Authorization: `Bearer ${token}` } }),
+        axios.get(`${API_URL}/api/admin/user-activity`, { headers: { Authorization: `Bearer ${token}` } }),
+        axios.get(`${API_URL}/api/admin/stats`, { headers: { Authorization: `Bearer ${token}` } }),
+        axios.get(`${API_URL}/api/admin/optimizer-history`, { headers: { Authorization: `Bearer ${token}` } })
       ]);
       
       setUsers(usersRes.data.users || []);
@@ -54,7 +55,7 @@ const AdminPanel = ({ darkMode }) => {
     
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`/api/admin/user/${userId}`, {
+      await axios.delete(`${API_URL}/api/admin/user/${userId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('User deleted successfully');
@@ -295,7 +296,7 @@ const AdminPanel = ({ darkMode }) => {
                     <th className="text-left py-2 px-3 text-xs font-medium">Last Login</th>
                     <th className="text-left py-2 px-3 text-xs font-medium">Last Optimized</th>
                     <th className="text-left py-2 px-3 text-xs font-medium">ATS Score</th>
-                   </tr>
+                  </tr>
                 </thead>
                 <tbody>
                   {activities.map((activity, idx) => (

@@ -7,6 +7,7 @@ import {
 } from 'react-icons/fi';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { API_URL } from '../config';
 
 const ResumeBuilder = ({ user, darkMode }) => {
   const [activeTab, setActiveTab] = useState('personal');
@@ -44,7 +45,7 @@ const ResumeBuilder = ({ user, darkMode }) => {
     setIsFetching(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('/api/resume/my-resume', {
+      const response = await axios.get(`${API_URL}/api/resume/my-resume`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -70,7 +71,7 @@ const ResumeBuilder = ({ user, darkMode }) => {
     }
   };
 
-  // ========== ALL MISSING FUNCTIONS ==========
+  // ========== ALL FUNCTIONS ==========
   
   const handlePersonalChange = (e) => {
     setResumeData({
@@ -164,7 +165,7 @@ const ResumeBuilder = ({ user, darkMode }) => {
     setResumeData({ ...resumeData, projects: updated });
   };
 
-  // ========== END OF MISSING FUNCTIONS ==========
+  // ========== END OF FUNCTIONS ==========
 
   // Check if resume has any content
   const hasResumeContent = () => {
@@ -195,7 +196,7 @@ const ResumeBuilder = ({ user, darkMode }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      await axios.post('/api/resume/save', { resumeData }, {
+      await axios.post(`${API_URL}/api/resume/save`, { resumeData }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('Resume saved successfully!', {
@@ -224,7 +225,7 @@ const ResumeBuilder = ({ user, darkMode }) => {
     
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('/api/resume/analyze', 
+      const response = await axios.post(`${API_URL}/api/resume/analyze`, 
         { 
           resumeData, 
           jobDescription: jobDescription || ''
