@@ -1,24 +1,29 @@
-const { Resend } = require('resend');
+const nodemailer = require('nodemailer');
 
-// Initialize Resend
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  host: 'smtp-relay.brevo.com',
+  port: 587,
+  auth: {
+    user: process.env.BREVO_SMTP_USER,
+    pass: process.env.BREVO_SMTP_KEY,
+  },
+});
 
 const sendOTPEmail = async (to, otp) => {
-  try {
-    // Log OTP to console for debugging
-    console.log('\n╔════════════════════════════════╗');
-    console.log('║     OTP EMAIL DETAILS           ║');
-    console.log('╠════════════════════════════════╣');
-    console.log(`║ TO: ${to.padEnd(27)}║`);
-    console.log(`║ OTP: ${otp.padEnd(25)}║`);
-    console.log('║ Service: Resend (Production)   ║');
-    console.log('║ Valid for: 10 minutes          ║');
-    console.log('╚════════════════════════════════╝\n');
+  // Log to console
+  console.log('\n╔════════════════════════════════╗');
+  console.log('║     OTP EMAIL DETAILS           ║');
+  console.log('╠════════════════════════════════╣');
+  console.log(`║ TO: ${to.padEnd(27)}║`);
+  console.log(`║ OTP: ${otp.padEnd(25)}║`);
+  console.log('║ Service: Brevo (Production)    ║');
+  console.log('║ Valid for: 10 minutes          ║');
+  console.log('╚════════════════════════════════╝\n');
 
-    // Send email via Resend
-    const { data, error } = await resend.emails.send({
-      from: 'noreply@resend.dev',
-      to: [to],
+  try {
+    await transporter.sendMail({
+      from: process.env.BREVO_FROM_EMAIL,
+      to: to,
       subject: '🔐 Verify Your Email - ATS Resume Optimizer',
       html: `
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -60,22 +65,13 @@ const sendOTPEmail = async (to, otp) => {
         </div>
       `,
     });
-
-    if (error) {
-      console.error('❌ Resend API Error:');
-      console.error(`   ${error.message}`);
-      return false;
-    }
-
-    console.log(`✅ Email sent successfully via Resend!`);
-    console.log(`   Email ID: ${data.id}`);
+    
+    console.log(`✅ Email sent successfully via Brevo!`);
     console.log(`   To: ${to}\n`);
     return true;
-
+    
   } catch (error) {
-    console.error('❌ Email sending failed:');
-    console.error(`   Error: ${error.message}`);
-    console.error(`   Check: RESEND_API_KEY in .env is correct\n`);
+    console.error('❌ Brevo error:', error.message);
     return false;
   }
 };
