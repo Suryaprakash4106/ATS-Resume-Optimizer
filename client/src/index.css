@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 10px;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Glass morphism effects */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Light mode glass card */
+.glass-card-light {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark mode glass card */
+.glass-card-dark {
+  background: rgba(31, 41, 55, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.zoom-on-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.zoom-on-hover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Text Colors - Light Mode */
+.light-mode-text-primary {
+  color: #1f2937;
+}
+
+.light-mode-text-secondary {
+  color: #4b5563;
+}
+
+.light-mode-text-muted {
+  color: #6b7280;
+}
+
+/* Text Colors - Dark Mode */
+.dark-mode-text-primary {
+  color: #f9fafb;
+}
+
+.dark-mode-text-secondary {
+  color: #d1d5db;
+}
+
+.dark-mode-text-muted {
+  color: #9ca3af;
+}
+
+/* Heading styles */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Light mode heading colors */
+h1, h2, h3 {
+  color: #1f2937;
+}
+
+.dark h1, .dark h2, .dark h3 {
+  color: #f9fafb;
+}
+
+/* Paragraph and text colors */
+p, span, li {
+  color: #4b5563;
+}
+
+.dark p, .dark span, .dark li {
+  color: #d1d5db;
+}
+
+/* Label colors */
+label {
+  color: #374151;
+}
+
+.dark label {
+  color: #9ca3af;
+}
+
+/* Placeholder colors */
+::placeholder {
+  color: #9ca3af;
+}
+
+.dark ::placeholder {
+  color: #6b7280;
+}
+
+/* Button text colors */
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px -5px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+  border: 1px solid #667eea;
+  color: #667eea;
+  background: transparent;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: #667eea;
+  color: white;
+}
+
+/* Input styles */
+input, textarea, select {
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  ring: 2px solid #667eea;
+  ring-offset: 2px;
+}
+
+/* Light mode input */
+input, textarea, select {
+  background-color: #f3f4f6;
+  color: #1f2937;
+  border: 1px solid #e5e7eb;
+}
+
+.dark input, .dark textarea, .dark select {
+  background-color: rgba(31, 41, 55, 0.8);
+  color: #f9fafb;
+  border: 1px solid #374151;
+}
+
+/* Card styles */
+.card {
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.card-light {
+  background: white;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.card-dark {
+  background: rgba(31, 41, 55, 0.9);
+  border: 1px solid #374151;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+}
+
+.light th {
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dark th {
+  color: #e5e7eb;
+  border-bottom: 1px solid #374151;
+}
+
+td {
+  padding: 0.75rem 1rem;
+}
+
+.light td {
+  color: #4b5563;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.dark td {
+  color: #9ca3af;
+  border-bottom: 1px solid #1f2937;
+}
