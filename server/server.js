@@ -13,6 +13,9 @@ const userRoutes = require('./routes/users');
 
 const app = express();
 
+// Trust Railway's reverse proxy (fixes express-rate-limit X-Forwarded-For warning)
+app.set('trust proxy', 1);
+
 // Security middleware
 app.use(helmet({
   contentSecurityPolicy: false,
