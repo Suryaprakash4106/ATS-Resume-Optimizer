@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   FiHome, FiUser, FiFileText, FiBarChart2, FiLogOut, 
-  FiSun, FiMoon, FiMenu, FiX, FiShield, FiClock 
+  FiMenu, FiX, FiShield, FiClock 
 } from 'react-icons/fi';
 
 const Navbar = ({ darkMode, toggleDarkMode, isAuthenticated, user, onLogout }) => {
@@ -96,27 +96,11 @@ const Navbar = ({ darkMode, toggleDarkMode, isAuthenticated, user, onLogout }) =
               </div>
             )}
             
-            {/* Dark Mode Toggle */}
-            <button
-              onClick={toggleDarkMode}
-              className={`ml-2 p-1.5 rounded-lg transition-all duration-300 cursor-pointer ${
-                darkMode ? 'bg-gray-800 text-yellow-400 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              {darkMode ? <FiSun size={16} /> : <FiMoon size={16} />}
-            </button>
+
           </div>
 
           {/* Mobile Menu Button */}
           <div className="flex items-center space-x-2 md:hidden">
-            <button
-              onClick={toggleDarkMode}
-              className={`p-1.5 rounded-lg transition-all duration-300 cursor-pointer ${
-                darkMode ? 'bg-gray-800 text-yellow-400' : 'bg-gray-100 text-gray-700'
-              }`}
-            >
-              {darkMode ? <FiSun size={14} /> : <FiMoon size={14} />}
-            </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={`p-1.5 rounded-lg transition-all duration-300 cursor-pointer ${
