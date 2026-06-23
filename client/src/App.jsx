@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Toaster } from 'react-hot-toast';
 import Background3D from './components/Background3D';
 import Navbar from './components/Navbar';
+import LoadingScreen from './components/LoadingScreen';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -18,6 +19,7 @@ function App() {
     const saved = localStorage.getItem('darkMode');
     return saved !== null ? JSON.parse(saved) : true;
   });
+  const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return !!localStorage.getItem('token');
   });
@@ -35,6 +37,11 @@ function App() {
     }
   }, [darkMode]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
   const toggleDarkMode = () => setDarkMode(!darkMode);
 
   const handleLogout = () => {
@@ -43,6 +50,8 @@ function App() {
     setIsAuthenticated(false);
     setUser(null);
   };
+
+  if (loading) return <LoadingScreen />;
 
   return (
     <Router>
