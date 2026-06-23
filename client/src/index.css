@@ -15,6 +15,29 @@ body {
   overflow-x: hidden;
 }
 
+/* ===== TEXT SELECTION FIX (cursor select pannum pothu) ===== */
+/* Light mode selection - dark text on light purple bg, fully readable */
+::selection {
+  background-color: #667eea;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: #667eea;
+  color: #ffffff;
+}
+
+/* Dark mode selection - lighter accent bg with dark text, fully readable */
+.dark ::selection {
+  background-color: #a5bcfc;
+  color: #1f2937;
+}
+
+.dark ::-moz-selection {
+  background-color: #a5bcfc;
+  color: #1f2937;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
